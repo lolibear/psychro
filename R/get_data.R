@@ -1,3 +1,10 @@
+#' Function to pull stored psychrometirc chart data
+
+#' @examples
+#' chart_data <- get_data()
+
+
+
 get_data <- function(){
   temp_32 <- data.frame(
     HR = c(0, 0.0004, 0.0008, 0.0012, 0.0015, 0.0019, 0.0022, 0.0026, 0.003, 0.0034, 0.0038),

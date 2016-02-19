@@ -1,3 +1,19 @@
+#' Function to get relative humidity/condense note after cooling
+#'
+#' @param T_pre Original Dry bulb temperature
+#' @param RH_pre Original relative humidity
+#' @param T_post Final Dry bulb temperature
+#' @param temp_list The stored data from psychrometric chart
+
+#' @examples
+#' cooling_air(78, 45, 56, chart_data)
+#' $RH
+#' [1] 97
+
+#' $note
+#' [1] ""
+
+
 cooling_air <- function(T_pre, RH_pre, T_post, temp_list) {
   get_humidity_ratio <- function(rh, temp){
     y <- approx(temp$RH, temp$HR, rh)$y
@@ -19,5 +35,5 @@ cooling_air <- function(T_pre, RH_pre, T_post, temp_list) {
     des <- "The air has condensed at this point"
   }
   
-  return(list(RH_post, des))
+  return(list(RH = RH_post, note = des))
 }

@@ -1,3 +1,15 @@
+#' Function to get relative humidity after heating
+#'
+#' @param T_pre Original Dry bulb temperature
+#' @param RH_pre Original relative humidity
+#' @param T_post Final Dry bulb temperature
+#' @param temp_list The stored data from psychrometric chart
+
+#' @examples
+#' heating_air(45, 40, 85, chart_data)
+#' [1] 10
+
+
 heating_air <- function(T_pre, RH_pre, T_post, temp_list) {
   get_humidity_ratio <- function(rh, temp){
     y <- approx(temp$RH, temp$HR, rh)$y
