@@ -30,7 +30,7 @@ MixMultiAir <- function(vec.t, vec.rh, temp.list) {
     
     t1.percent <- initial.p/(initial.p + fix.p)
     
-    mix <- mix_air(t1, rh1, t2, rh2, t1.percent, temp.list)
+    mix <- MixAir(t1, rh1, t2, rh2, t1.percent, temp.list)
     t.mix <- mix$temp
     rh.mix <- mix$rh
     
