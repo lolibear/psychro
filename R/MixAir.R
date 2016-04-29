@@ -24,15 +24,34 @@ MixAir <- function(t1, rh1, t2, rh2, t1.percent, temp.list) {
   
   GetRelativeHumidity <- function(hr, temp){
     y <- approx(temp$hr, temp$rh, hr)$y
-    return(round(y, digits = 0))
+    return(y)
   }
-  hr1 <- GetHumidityRatio(rh1, temp.list[[toString(t1)]])
-  hr2 <- GetHumidityRatio(rh2, temp.list[[toString(t2)]])
+  
+  floor.t1 <- floor(t1)
+  ceiling.t1 <- ceiling(t1)
+  
+  floor.t2 <- floor(t2)
+  ceiling.t2 <- ceiling(t2)
+  
+  hr1 <- GetHumidityRatio(rh1, temp.list[[toString(ceiling.t1)]]) - 
+    (GetHumidityRatio(rh1, temp.list[[toString(ceiling.t1)]]) - GetHumidityRatio(rh1, temp.list[[toString(floor.t1)]]))*
+    (ceiling.t1 - t1)
+  
+  
+  hr2 <- GetHumidityRatio(rh2, temp.list[[toString(ceiling.t2)]]) - 
+    (GetHumidityRatio(rh2, temp.list[[toString(ceiling.t2)]]) - GetHumidityRatio(rh2, temp.list[[toString(floor.t2)]]))*
+    (ceiling.t2 - t2)
   
   hr.mix <- t1.percent*hr1 + (1 - t1.percent)*hr2
-  t.mix <- round(t1.percent*t1 + (1 - t1.percent)*t2, digits = 0)
+  t.mix <- t1.percent*t1 + (1 - t1.percent)*t2
   
-  rh.mix <- GetRelativeHumidity(hr.mix, temp.list[[toString(t.mix)]])
+  floor.tmix <- floor(t.mix)
+  ceiling.tmix <- ceiling(t.mix)
+  
+  
+  rh.mix <- GetRelativeHumidity(hr.mix, temp.list[[toString(ceiling.tmix)]]) - 
+    (GetRelativeHumidity(hr.mix, temp.list[[toString(ceiling.tmix)]]) - GetRelativeHumidity(hr.mix, temp.list[[toString(floor.tmix)]]))*
+    (ceiling.tmix - t.mix)
   
   return(list(temp = t.mix, rh = rh.mix))
 }
