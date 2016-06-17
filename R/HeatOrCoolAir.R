@@ -21,7 +21,8 @@ HeatOrCoolAir <- function(t.pre, rh.pre, t.post, temp.list) {
   
   GetRelativeHumidity <- function(hr, temp){
     y <- approx(temp$hr, temp$rh, hr)$y
-    return(round(y, digits = 0))
+    if(is.na(y)) y <- max(temp$rh)
+    return(round(y, digits = 2))
   }
 
   floor.t.pre <- floor(t.pre)
