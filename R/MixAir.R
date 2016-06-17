@@ -24,6 +24,7 @@ MixAir <- function(t1, rh1, t2, rh2, t1.percent, temp.list) {
   
   GetRelativeHumidity <- function(hr, temp){
     y <- approx(temp$hr, temp$rh, hr)$y
+    if(is.na(y)) y <- max(temp$rh)
     return(y)
   }
   
